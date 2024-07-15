@@ -1,55 +1,23 @@
 #include "CInsertQuery.hpp"
-#include <iostream>
 
-namespace Database
+const std::string sCommand = "INSERT INTO";
+const std::string sValues = "VALUES";
+
+bool Database::CInsertQuery::insertData(CIngredient ingredient)
 {
+    //INSERT INTO Ingredients (name, description) VALUES ('Garlic', 'Fresh garlic cloves');
 
-void CInsertQuery::getCommand()
-{
-    // std::string cmd;
+    std::string query{};
 
-    // //Set action
-    // cmd.append(convertActionToString(getAction()));
-    // cmd.append(" ");
+    query += sCommand;
+    query += " ";
+    query += "(";
+    for (const auto& column : m_ingTable.columnNames)
+    {
+        query += column;
+    }
+    query += ")";
+    query += sValues;
 
-    // //Set table
-    // cmd.append(getTable());
-    // cmd.append(" ");
-
-    // //Set columns
-    // auto columnValues = getColumnValues();
-    // cmd.append("(");
-    // for (auto it = columnValues.begin(); it != columnValues.end(); ++it)
-    // {
-    //     cmd.append(it->first);
-    //     if (std::next(it) != columnValues.end())
-    //     {
-    //         cmd.append(",");
-    //     }
-    // }
-    // cmd.append(")");
-
-    // //Set table
-    // cmd.append(" VALUES ");
-
-    // //Set values
-    // cmd.append("(");
-    // for (auto it = columnValues.begin(); it != columnValues.end(); ++it)
-    // {
-    //     cmd.append(it->second);
-    //     if (std::next(it) != columnValues.end())
-    //     {
-    //         cmd.append(",");
-    //     }
-    // }
-    // cmd.append(")");
-    // std::cout << cmd;
+    return false;
 }
-
-void CInsertQuery::showCommand()
-{
-
-
-    std::string_view cmd;
-}
-} // namespace Database

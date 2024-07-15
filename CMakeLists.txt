@@ -4,7 +4,12 @@ project(TestProj VERSION 0.1.0 LANGUAGES C CXX)
 include(CTest)
 enable_testing()
 
-include_directories("libs/asio-1.28.0/include")
+include_directories(
+    "libs/asio-1.28.0/include"
+    ${PROJECT_SOURCE_DIR}/Datastructures
+    ${PROJECT_SOURCE_DIR}/DbHelper
+    ${PROJECT_SOURCE_DIR}/DbHelper/Query
+    )
 
 find_package(SQLite3 REQUIRED)
 
@@ -17,19 +22,16 @@ set(HEADERS
     DbHelper/CDatabaseManager.hpp
     DbHelper/CDatabaseQueryWrapper.hpp
     Datastructures/CIngredient.hpp
-    Datastructures/CIngredientManager.hpp
+    DbHelper/CIngredientsTable.hpp
     )
     
     set(SOURCES
-    DbHelper/Query/IQuery.cpp
-    DbHelper/Query/CSelectQuery.cpp
     DbHelper/Query/CInsertQuery.cpp
+    DbHelper/Query/CSelectQuery.cpp
     DbHelper/CDatabaseManager.cpp
     DbHelper/CDatabaseQueryWrapper.cpp
-    Datastructures/CIngredient.cpp
-    Datastructures/CIngredientManager.cpp
 
-    testSaveStuff.cpp
+    testDb.cpp
 )
 
 add_executable(TestProj ${HEADERS} ${SOURCES} )

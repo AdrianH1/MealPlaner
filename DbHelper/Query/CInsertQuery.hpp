@@ -1,15 +1,15 @@
 #pragma once
 
-#include "IQuery.hpp"
+#include <CIngredient.hpp>
+#include <CIngredientsTable.hpp>
 
 namespace Database
 {
-class CInsertQuery : public IQuery
+class CInsertQuery
 {
-private:
-    /* data */
 public:
-    void getCommand();
-    void showCommand();
+    bool insertData(CIngredient ingredient);
+private:
+    CIngredientsTable m_ingTable{};
 };
 } // namespace Database
