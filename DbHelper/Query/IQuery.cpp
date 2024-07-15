@@ -23,6 +23,11 @@ const std::string IQuery::getTable()
     return m_table;
 }
 
+void IQuery::addColumnValues(IColumnValue<int> columvalue)
+{
+    m_columnValues.push_back(columvalue);
+}
+
 void IQuery::setColumnValues(IQuery::tColumnValues columnValues)
 {
     m_columnValues = columnValues;
@@ -42,5 +47,26 @@ const CCondition IQuery::getCondition()
 {
     return m_condition;
 }
+
+std::string IQuery::convertActionToString(QueryAction action)
+{
+    switch (action)
+    {
+    case QueryAction::SELECT:
+        return "SELECT";
+    case QueryAction::INSERT:
+        return "INSERT INTO";
+    case QueryAction::UPADTE:
+        return "UPADTE";
+    case QueryAction::DELETE:
+        return "DELETE";
+    case QueryAction::INVALID:
+        return "INVALID";
+    default:
+        return "INVALID";
+    }
+}
+
+
 
 } // namespace Database

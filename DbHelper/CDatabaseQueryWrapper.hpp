@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 #include <sqlite3.h>
 #include "CDatabaseManager.hpp"
@@ -8,5 +10,5 @@ public:
     // void executeSelect(selectQuery *query);
 
 private:
-    std::unique_ptr<CDatabaseManager> m_dbManager = std::make_unique<CDatabaseManager>("test.db");
+    //std::unique_ptr<CDatabaseManager> m_dbManager = std::make_unique<CDatabaseManager>("test.db");
 };

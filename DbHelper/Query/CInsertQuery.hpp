@@ -4,7 +4,7 @@
 
 namespace Database
 {
-class CSelectQuery : public IQuery
+class CInsertQuery : public IQuery
 {
 private:
     /* data */

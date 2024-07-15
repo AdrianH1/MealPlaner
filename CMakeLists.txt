@@ -10,17 +10,26 @@ find_package(SQLite3 REQUIRED)
 
 set(HEADERS
     DbHelper/Query/IQuery.hpp
+    DbHelper/Query/CCondition.hpp
     DbHelper/Query/CSelectQuery.hpp
+    DbHelper/Query/CInsertQuery.hpp
+    DbHelper/Query/IColumnValue.hpp
     DbHelper/CDatabaseManager.hpp
     DbHelper/CDatabaseQueryWrapper.hpp
-)
-
-set(SOURCES
-    main.cpp
-    DbHelper/Query/CCondition.cpp
+    Datastructures/CIngredient.hpp
+    Datastructures/CIngredientManager.hpp
+    )
+    
+    set(SOURCES
+    DbHelper/Query/IQuery.cpp
     DbHelper/Query/CSelectQuery.cpp
+    DbHelper/Query/CInsertQuery.cpp
     DbHelper/CDatabaseManager.cpp
     DbHelper/CDatabaseQueryWrapper.cpp
+    Datastructures/CIngredient.cpp
+    Datastructures/CIngredientManager.cpp
+
+    testSaveStuff.cpp
 )
 
 add_executable(TestProj ${HEADERS} ${SOURCES} )

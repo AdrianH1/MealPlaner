@@ -1,10 +1,10 @@
-#include "CSelectQuery.hpp"
+#include "CInsertQuery.hpp"
 #include <iostream>
 
 namespace Database
 {
 
-void CSelectQuery::getCommand()
+void CInsertQuery::getCommand()
 {
     // std::string cmd;
 
@@ -12,8 +12,13 @@ void CSelectQuery::getCommand()
     // cmd.append(convertActionToString(getAction()));
     // cmd.append(" ");
 
+    // //Set table
+    // cmd.append(getTable());
+    // cmd.append(" ");
+
     // //Set columns
     // auto columnValues = getColumnValues();
+    // cmd.append("(");
     // for (auto it = columnValues.begin(); it != columnValues.end(); ++it)
     // {
     //     cmd.append(it->first);
@@ -22,21 +27,26 @@ void CSelectQuery::getCommand()
     //         cmd.append(",");
     //     }
     // }
+    // cmd.append(")");
 
     // //Set table
-    // cmd.append(" FROM ");
-    // cmd.append(getTable());
+    // cmd.append(" VALUES ");
 
-    // //Set condition
-    // cmd.append(" WHERE ");
-    // cmd.append(getCondition().m_column);
-    // cmd.push_back(getCondition().m_condition);
-    // cmd.append(getCondition().m_value);
-
+    // //Set values
+    // cmd.append("(");
+    // for (auto it = columnValues.begin(); it != columnValues.end(); ++it)
+    // {
+    //     cmd.append(it->second);
+    //     if (std::next(it) != columnValues.end())
+    //     {
+    //         cmd.append(",");
+    //     }
+    // }
+    // cmd.append(")");
     // std::cout << cmd;
 }
 
-void CSelectQuery::showCommand()
+void CInsertQuery::showCommand()
 {
 
 
