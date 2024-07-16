@@ -5,7 +5,8 @@
             "includePath": [
                 "${default}",
                 "${workspaceFolder}/Datastructures",
-                "${workspaceFolder}/DbHelper"
+                "${workspaceFolder}/DbHelper",
+                "${workspaceFolder}/DbHelper/Query"
             ],
             "defines": [
                 "_DEBUG",

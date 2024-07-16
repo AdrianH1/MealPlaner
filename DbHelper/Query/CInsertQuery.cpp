@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "CInsertQuery.hpp"
 
 const std::string sCommand = "INSERT INTO";
@@ -11,13 +13,52 @@ bool Database::CInsertQuery::insertData(CIngredient ingredient)
 
     query += sCommand;
     query += " ";
-    query += "(";
-    for (const auto& column : m_ingTable.columnNames)
-    {
-        query += column;
-    }
-    query += ")";
-    query += sValues;
 
-    return false;
+    query += m_ingTable.tableName;
+    query += " ";
+
+    query += getColumnNames();
+    query += " ";
+
+    query += sValues;
+    query += " ";
+
+    query += getValues(ingredient.getValuesForSql());
+
+    std::cout << query << std::endl;
+
+    return true;
+}
+
+std::string Database::CInsertQuery::getColumnNames()
+{
+    std::string result{};
+    result += "(";
+    auto arr = m_ingTable.columnNames;
+    for (auto it = arr.begin(); it != arr.end(); ++it) {
+        result += *it;
+        if (it != arr.end() - 1)
+        {
+            result += ",";
+        }
+    }
+    result += ")";
+
+    return result;
+}
+
+std::string Database::CInsertQuery::getValues(std::vector<std::string> vec)
+{
+    std::string result{};
+    result += "(";
+    for (auto it = vec.begin(); it != vec.end(); ++it) {
+        result += *it;
+        if (it != vec.end() - 1)
+        {
+            result += ",";
+        }
+    }
+    result += ")";
+
+    return result;
 }
