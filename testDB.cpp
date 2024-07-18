@@ -5,6 +5,11 @@
 #include <sqlite3.h>
 
 #include <CIngredient.hpp>
+#include <CMeal.hpp>
+#include <CMealPlan.hpp>
+#include <CIngredientsTable.hpp>
+#include <CMealsTable.hpp>
+#include <CMealPlansTable.hpp>
 #include <CInsertQuery.hpp>
 
 int callback(void *data, int argc, char **argv, char **azColName)
@@ -22,13 +27,27 @@ int main()
     std::cout << "Hello, from TestProj!\n";
     std::clog << "Hello, from TestProj!\n";
 
+    Database::CInsertQuery iQuery{};
+
     CIngredient ing{};
+    CIngredientsTable ingT{};
     ing.m_name = "Mehl";
     ing.m_amount = 200;
     ing.m_unit = "g";
+    iQuery.insertData(ing, ingT);
 
-    Database::CInsertQuery iQuery{};
-    iQuery.insertData(ing);
+    CMeal meal{};
+    CMealsTable mealT{};
+    meal.m_name = "Spaghetti";
+    meal.m_category = "Lunch";
+    meal.m_link = "www.google.ch";
+    meal.m_instructions = "1. Kochen, 2. Essen";
+    iQuery.insertData(meal, mealT);
+
+    CMealPlan mealPlan{};
+    CMealPlansTable mealPlanT{};
+    mealPlan.m_name = "Plan 1";
+    iQuery.insertData(mealPlan, mealPlanT);
 
     sqlite3 *db;
     char *zErrMsg = 0;
@@ -50,6 +69,8 @@ int main()
     // SQL query
     const char *sql = "select * from tbl1";
     // const char *sql = "INSERT INTO Ingredients (Name,Amount,Unit) VALUES ('Mehl',200.000000,'g')";
+    // const char *sql = "INSERT INTO Meals (name,link,category,instruction) VALUES ('Spaghetti','www.google.ch','Lunch','1. Kochen, 2. Essen')";
+    // const char *sql = "INSERT INTO MealPlans (name) VALUES ('Plan 1')";
 
     // Execute the SQL statement with the callback function
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);

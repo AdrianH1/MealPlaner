@@ -2,14 +2,15 @@
 
 #include <string>
 #include <vector>
+#include "IData.hpp"
 
-struct CIngredient
+struct CIngredient : public IData
 {
     std::string m_name{};
     float m_amount{};
     std::string m_unit{};
 
-    std::vector<std::string> getValuesForSql()
+    std::vector<std::string> getValuesForSql() override
     {
         std::vector<std::string> values
         {

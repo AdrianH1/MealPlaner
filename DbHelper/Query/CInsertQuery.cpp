@@ -5,7 +5,7 @@
 const std::string sCommand = "INSERT INTO";
 const std::string sValues = "VALUES";
 
-bool Database::CInsertQuery::insertData(CIngredient ingredient)
+bool Database::CInsertQuery::insertData(IData& data, ITable& table)
 {
     //INSERT INTO Ingredients (name, description) VALUES ('Garlic', 'Fresh garlic cloves');
 
@@ -14,27 +14,27 @@ bool Database::CInsertQuery::insertData(CIngredient ingredient)
     query += sCommand;
     query += " ";
 
-    query += m_ingTable.tableName;
+    query += table.getTableName();
     query += " ";
 
-    query += getColumnNames();
+    query += getColumnNames(table);
     query += " ";
 
     query += sValues;
     query += " ";
 
-    query += getValues(ingredient.getValuesForSql());
+    query += getValues(data.getValuesForSql());
 
     std::cout << query << std::endl;
 
     return true;
 }
 
-std::string Database::CInsertQuery::getColumnNames()
+std::string Database::CInsertQuery::getColumnNames(ITable& table)
 {
     std::string result{};
     result += "(";
-    auto arr = m_ingTable.columnNames;
+    auto arr = table.getColumnNames();
     for (auto it = arr.begin(); it != arr.end(); ++it) {
         result += *it;
         if (it != arr.end() - 1)

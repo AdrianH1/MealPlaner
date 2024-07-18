@@ -4,7 +4,7 @@
 #include <array>
 #include "ITable.hpp"
 
-class CIngredientsTable : public ITable
+class CMealPlansTable : public ITable
 {
 public:
     std::string getTableName() const override
@@ -15,12 +15,11 @@ public:
     {
         return m_columnNames;
     };
+
 private:
     std::vector<std::string> m_columnNames
     {
-        "Name",
-        "Amount",
-        "Unit"
+        "name"
     };
-    std::string m_tableName = "Ingredients";
+    std::string m_tableName = "MealPlans";
 };

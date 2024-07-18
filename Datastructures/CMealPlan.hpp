@@ -2,15 +2,19 @@
 
 #include <string>
 #include <vector>
-#include "CMeal.hpp"
+#include "IData.hpp"
 
-class CMealPlan
+struct CMealPlan : public IData
 {
-public:
-    CMealPlan();
-    ~CMealPlan();
+    std::string m_name;
+    // std::vector<CMeal> meals;
 
-private:
-    std::string startTime;
-    std::vector<CMeal> meals;
+    std::vector<std::string> getValuesForSql() override
+    {
+        std::vector<std::string> values
+        {
+            "\'" + m_name + "\'"
+        };
+        return values;
+    }
 };

@@ -2,17 +2,25 @@
 
 #include <string>
 #include <vector>
-#include "CIngredient.hpp"
+#include "IData.hpp"
 
-class CMeal
+struct CMeal : public IData
 {
-public:
-    CMeal(const std::string& name, const std::string& link, const std::string& category, const std::vector<std::string>& m_instructions, const std::vector<CIngredient>& ingredients);
-
-private:
     std::string m_name;
     std::string m_link;
     std::string m_category;
-    std::vector<std::string> m_instructions;
-    std::vector<CIngredient> m_ingredients;
+    std::string m_instructions;
+    // std::vector<CIngredient> m_ingredients;
+
+    std::vector<std::string> getValuesForSql() override
+    {
+        std::vector<std::string> values
+        {
+            "\'" + m_name + "\'",
+            "\'" + m_link + "\'",
+            "\'" + m_category + "\'",
+            "\'" + m_instructions + "\'"
+        };
+        return values;
+    }
 };
